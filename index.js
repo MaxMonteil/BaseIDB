@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 
-export class StoresIdb {
+export class IdbStores {
   static _version = 1;
   static _freshStart = true;
   static _checking = false;
@@ -13,9 +13,9 @@ export class StoresIdb {
   _checkDbVersion(dbName) {
     return new Promise((resolve) => {
       openDB(dbName).then((db) => {
-        StoresIdb._version = db.version;
+        IdbStores._version = db.version;
         db.close(); // always close db
-        StoresIdb._freshStart = false;
+        IdbStores._freshStart = false;
         resolve();
       });
     });
@@ -25,18 +25,18 @@ export class StoresIdb {
     this._name = name;
     this._store = store;
 
-    if (StoresIdb._freshStart && !StoresIdb._checking) {
-      StoresIdb._checking = true;
-      StoresIdb._dbCheck = this._checkDbVersion(this._name);
+    if (IdbStores._freshStart && !IdbStores._checking) {
+      IdbStores._checking = true;
+      IdbStores._dbCheck = this._checkDbVersion(this._name);
     }
   }
 
   // stores are actually created here instead of in the constructor,
   // this prevents random stores from being created right at app launch when the user might not even be logged in
   async getStore(store = this._store) {
-    await StoresIdb._dbCheck;
+    await IdbStores._dbCheck;
 
-    const db = await openDB(this._name, StoresIdb._version, {
+    const db = await openDB(this._name, IdbStores._version, {
       // first time db is opened (outisde of check), create the store
       upgrade: (db) => db.createObjectStore(store),
     });
@@ -46,8 +46,8 @@ export class StoresIdb {
     // always close db to avoid blocking transactions on other stores
     db.close();
 
-    StoresIdb._version += 1;
-    return await openDB(this._name, StoresIdb._version, {
+    IdbStores._version += 1;
+    return await openDB(this._name, IdbStores._version, {
       // this time we're creating a new store
       upgrade: (db) => db.createObjectStore(store),
     });

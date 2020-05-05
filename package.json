@@ -1,5 +1,5 @@
 {
-  "name": "stores-idb",
+  "name": "idb-stores",
   "version": "0.1.0",
   "description": "A small wrapper around idb to support creating multiple stores at runtime",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MaxMonteil/stores-idb.git"
+    "url": "git+https://github.com/MaxMonteil/idb-stores.git"
   },
   "author": "Maximilien Monteil",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MaxMonteil/stores-idb/issues"
+    "url": "https://github.com/MaxMonteil/idb-stores/issues"
   },
-  "homepage": "https://github.com/MaxMonteil/stores-idb#readme",
+  "homepage": "https://github.com/MaxMonteil/idb-stores#readme",
   "dependencies": {
     "idb": "^5.0.2"
   }
