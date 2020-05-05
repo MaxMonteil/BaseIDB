@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MaxMonteil/stores-idb/issues"
   },
-  "homepage": "https://github.com/MaxMonteil/stores-idb#readme"
+  "homepage": "https://github.com/MaxMonteil/stores-idb#readme",
+  "dependencies": {
+    "idb": "^5.0.2"
+  }
 }
